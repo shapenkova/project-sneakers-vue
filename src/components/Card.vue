@@ -6,7 +6,7 @@
       :src="!isFavorite ? '/like-1.svg' : '/like-2.svg'"
       alt="Like 1"
       class="absolute top-8 left-8"
-      @click="onClickFavorire"
+      @click="onClickFavorite"
     />
     <img :src="imageUrl" alt="Sneaker" />
     <p class="mt-2">{{ title }}</p>
@@ -17,23 +17,20 @@
         <b>{{ price }} руб.</b>
       </div>
 
-      <img
-        :src="!isAdded ? '/plus.svg' : '/checked.svg'"
-        alt="Plus"
-        @click="onClickAdd"
-      />
+      <img :src="!isAdded ? '/plus.svg' : '/checked.svg'" alt="Plus" @click="onClickAdd" />
     </div>
   </div>
 </template>
 
 <script setup>
 defineProps({
+  id: Number,
   title: String,
   imageUrl: String,
   price: Number,
   isFavorite: Boolean,
   isAdded: Boolean,
   onClickAdd: Function,
-  onClickFavorire: Function,
+  onClickFavorite: Function,
 })
 </script>
