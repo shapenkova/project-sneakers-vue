@@ -1,8 +1,8 @@
 <template>
-  <!-- <Drawer /> -->
+  <Drawer v-if="drawerOpen" />
 
   <div class="bg-white w-4/5 m-auto rounded-xl shadow-xl mt-14">
-    <Header />
+    <Header @open-drawer="openDrawer" />
 
     <div class="p-10">
       <div class="flex justify-between items-center">
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <CardList :items="items" @addToFavorite="addToFavorite" />
+      <CardList :items="items" @addToFavorite="addToFavorite" @add-to-cart="addToCart" />
     </div>
   </div>
 </template>
@@ -37,11 +37,22 @@ import axios from 'axios'
 
 import Header from './components/Header.vue'
 import CardList from './components/CardList.vue'
-// import Drawer from './components/DrawerBlock.vue'
+import Drawer from './components/DrawerBlock.vue'
 
 //стейт, который хранит наши товары(кроссовки)
 //ref использовали, потому что он хранит массив
 const items = ref([])
+const cart = ref([])
+
+const drawerOpen = ref(false)
+
+const closeDrawer = () => {
+  drawerOpen.value = false
+}
+
+const openDrawer = () => {
+  drawerOpen.value = true
+}
 
 //стейст, который хранит наши фильтры, reacrive - для объектов
 const filters = reactive({
@@ -49,13 +60,22 @@ const filters = reactive({
   searchQuery: '',
 })
 
+const addToCart = (item) => {
+  if(!item.isAdded) {
+    cart.value.push(item);
+    item.isAdded = true;
+  } else {
+    cart.value.splice(cart.value.indexOf(item), 1);
+    item.isAdded = false;
+  }
+}
 //две функции, которые следят за изменениями селекта и поиска(input)
 const onChangeSelect = (event) => {
-  filters.sortBy = event.target.value
+  filters.sortBy = event.target.value;
 }
 
 const onChangeSearchInput = (event) => {
-  filters.searchQuery = event.target.value
+  filters.searchQuery = event.target.value;
 }
 
 const fetchFavorites = async () => {
@@ -80,21 +100,20 @@ const fetchFavorites = async () => {
 
 const addToFavorite = async (item) => {
   try {
-    if(!item.isFavorite){
+    if (!item.isFavorite) {
       const obj = {
-        parentId: item.id
-      };
-      item.isFavorite = true;
+        parentId: item.id,
+      }
+      item.isFavorite = true
 
-      const { data } = await axios.post(`https://780569a4959bcd37.mokky.dev/favorites`, obj);
+      const { data } = await axios.post(`https://780569a4959bcd37.mokky.dev/favorites`, obj)
 
-      item.favoriteId = data.id;
+      item.favoriteId = data.id
     } else {
-      item.isFavorite = false;
-      await axios.delete(`https://780569a4959bcd37.mokky.dev/favorites/${item.favoriteId}`);
-      item.isFavorite = null;
+      item.isFavorite = false
+      await axios.delete(`https://780569a4959bcd37.mokky.dev/favorites/${item.favoriteId}`)
+      item.isFavorite = null
     }
-
   } catch (err) {
     console.log(err)
   }
@@ -137,5 +156,8 @@ onMounted(async () => {
   await fetchFavorites()
 })
 watch(filters, fetchItems)
-provide('addToFavorite', addToFavorite)
+provide('cardActions', {
+  closeDrawer,
+  openDrawer,
+})
 </script>
