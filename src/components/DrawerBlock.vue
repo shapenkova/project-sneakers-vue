@@ -2,33 +2,40 @@
   <div class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"></div>
   <div class="bg-white w-96 h-full fixed right-0 top-0 z-20 p-8">
     <DrawerHead />
-    <CartListItem  />
+    <CartListItem />
 
     <div class="flex flex-col gap-4 my-7">
-      <div class="flex gap-2 ">
+      <div class="flex gap-2">
         <span>Итого:</span>
         <div class="flex-1 border-b border-dashed"></div>
-        <b>12220 &#8381;</b>
+        <b>{{ totalPrice }} &#8381;</b>
       </div>
 
-      <div class="flex gap-2 ">
+      <div class="flex gap-2">
         <span>Налог 5%:</span>
         <div class="flex-1 border-b border-dashed"></div>
-        <b>1220 &#8381;</b>
+        <b>{{ vatPrice }} &#8381;</b>
       </div>
 
       <button
-        disabled=""
+        :disabled="totalPrice ? false : true"
+        @click="() => emit('createOrder')"
         class="bg-lime-500 w-full rounded-xl py-3 text-white hover:bg-lime-600 transition active:bg-lime-700 disabled:bg-slate-300 cursor-pointer mt-4"
       >
         Оформить заказ
       </button>
     </div>
-
   </div>
 </template>
 
 <script setup>
 import DrawerHead from './DrawerHead.vue'
 import CartListItem from './CartListItem.vue'
+
+const emit = defineEmits(['createOrder'])
+
+defineProps({
+  totalPrice: Number,
+  vatPrice: Number,
+})
 </script>

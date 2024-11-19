@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
+import { inject } from 'vue'
 
-const {closeDrawer} = inject('cardActions');
+const { closeDrawer } = inject('cart')
 </script>

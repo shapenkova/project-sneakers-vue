@@ -1,8 +1,8 @@
 <template>
-  <Drawer v-if="drawerOpen" />
+  <Drawer v-if="drawerOpen" :total-price="totalPrice" :vat-price="vatPrice" @create-order="createOrder"/>
 
   <div class="bg-white w-4/5 m-auto rounded-xl shadow-xl mt-14">
-    <Header @open-drawer="openDrawer" />
+    <Header @open-drawer="openDrawer" :total-price="totalPrice" />
 
     <div class="p-10">
       <div class="flex justify-between items-center">
@@ -26,13 +26,13 @@
         </div>
       </div>
 
-      <CardList :items="items" @addToFavorite="addToFavorite" @add-to-cart="addToCart" />
+      <CardList :items="items" @addToFavorite="addToFavorite" @add-to-cart="onClickAddPlus" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, provide, watch } from 'vue'
+import { onMounted, reactive, ref, provide, watch, computed } from 'vue'
 import axios from 'axios'
 
 import Header from './components/Header.vue'
@@ -45,6 +45,9 @@ const items = ref([])
 const cart = ref([])
 
 const drawerOpen = ref(false)
+
+const totalPrice = computed(() => cart.value.reduce((acc, item) => acc + item.price, 0))
+const vatPrice = computed(() => Math.round(totalPrice.value * 5) / 100)
 
 const closeDrawer = () => {
   drawerOpen.value = false
@@ -61,21 +64,45 @@ const filters = reactive({
 })
 
 const addToCart = (item) => {
-  if(!item.isAdded) {
-    cart.value.push(item);
-    item.isAdded = true;
+  cart.value.push(item)
+  item.isAdded = true
+}
+
+const removeFromCart = (item) => {
+  cart.value.splice(cart.value.indexOf(item), 1)
+  item.isAdded = false
+}
+
+//функция, которая переносит заказ на бэкенд
+const createOrder = async () => {
+  try {
+    const { data } = await axios.get(`https://780569a4959bcd37.mokky.dev/orders`, {
+      items: cart.value,
+      totalPrice: totalPrice.value,
+    })
+
+    cart.value = []
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const onClickAddPlus = (item) => {
+  if (!item.isAdded) {
+    addToCart(item)
   } else {
-    cart.value.splice(cart.value.indexOf(item), 1);
-    item.isAdded = false;
+    removeFromCart(item)
   }
 }
 //две функции, которые следят за изменениями селекта и поиска(input)
 const onChangeSelect = (event) => {
-  filters.sortBy = event.target.value;
+  filters.sortBy = event.target.value
 }
 
 const onChangeSearchInput = (event) => {
-  filters.searchQuery = event.target.value;
+  filters.searchQuery = event.target.value
 }
 
 const fetchFavorites = async () => {
@@ -156,8 +183,11 @@ onMounted(async () => {
   await fetchFavorites()
 })
 watch(filters, fetchItems)
-provide('cardActions', {
+provide('cart', {
+  cart,
   closeDrawer,
   openDrawer,
+  addToCart,
+  removeFromCart,
 })
 </script>
