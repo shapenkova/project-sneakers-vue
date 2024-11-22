@@ -18,7 +18,7 @@
       </div>
 
       <button
-        :disabled="totalPrice ? false : true"
+        :disabled="buttonDisabled"
         @click="() => emit('createOrder')"
         class="bg-lime-500 w-full rounded-xl py-3 text-white hover:bg-lime-600 transition active:bg-lime-700 disabled:bg-slate-300 cursor-pointer mt-4"
       >
@@ -37,5 +37,6 @@ const emit = defineEmits(['createOrder'])
 defineProps({
   totalPrice: Number,
   vatPrice: Number,
+  buttonDisabled: Boolean,
 })
 </script>
