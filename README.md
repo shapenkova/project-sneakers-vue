@@ -23,3 +23,5 @@
 ## Скриншоты
 
 ![Главная страница приложения](/screenshots/main.jpeg)
+![Корзина приложения](/screenshots/basket.jpeg)
+![Страница Закладки](/screenshots/bookmarks.jpeg)
