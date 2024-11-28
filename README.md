@@ -1,35 +1,22 @@
-# vue-app-sneakers
+# **Vue Sneakers** 👟
+## Как запустить?
 
-This template should help get you started developing with Vue 3 in Vite.
+1. Склонировать репозиторий к себе на ПК
+2. npm install
+3. npm run dev
+4. Готово!
 
-## Recommended IDE Setup
+## Описание проекта:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Приложение интернет-магазин Vue-Sneakers.
 
-## Customize configuration
+## Стэк технологий:
+- Vue 3
+- Vue Router
+- TailwindCSS
+- Axios
+- @formkit/auto-animate
+- Composition API / Options API
+- ESLint
+- Prettier
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
