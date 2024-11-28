@@ -22,7 +22,10 @@
 
 <details>
   <summary> Скриншоты </summary>
+  <p>
     ![Главная страница приложения](/screenshots/main.jpeg)
+  </p>
+    
     ![Корзина приложения](/screenshots/basket.jpeg)
     ![Страница Закладки](/screenshots/bookmatks.jpeg)
 </details>
