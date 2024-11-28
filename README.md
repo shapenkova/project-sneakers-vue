@@ -20,3 +20,6 @@
 - ESLint
 - Prettier
 
+## Скриншоты
+
+![/screenshots/main.jpeg]
