@@ -22,4 +22,4 @@
 
 ## Скриншоты
 
-![/screenshots/main.jpeg]
+![Главная страница приложения](/screenshots/main.jpeg)
