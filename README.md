@@ -21,10 +21,15 @@
 - Prettier
 
 <details>
-  <summary>Скриншоты</summary>
+  
+  <summary> Скриншоты </summary>
+  
     ![Главная страница приложения](/screenshots/main.jpeg)
+  
     ![Корзина приложения](/screenshots/basket.jpeg)
+    
     ![Страница Закладки](/screenshots/bookmatks.jpeg)
+    
 </details>
 
 
