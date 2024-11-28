@@ -20,19 +20,11 @@
 - ESLint
 - Prettier
 
-## Скриншоты
-
 <details>
-  <summary>Нажмите, чтобы развернуть и увидеть фотографии</summary>
-
-  ![Фото 1](путь/к/фото1.jpg)
-
-  ![Фото 2](путь/к/фото2.jpg)
-
-  ![Фото 3](путь/к/фото3.jpg)
-
+  <summary>Скриншоты</summary>
+    ![Главная страница приложения](/screenshots/main.jpeg)
+    ![Корзина приложения](/screenshots/basket.jpeg)
+    ![Страница Закладки](/screenshots/bookmatks.jpeg)
 </details>
 
-![Главная страница приложения](/screenshots/main.jpeg)
-![Корзина приложения](/screenshots/basket.jpeg)
-![Страница Закладки](/screenshots/bookmatks.jpeg)
+
