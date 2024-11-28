@@ -30,7 +30,7 @@
   ![Корзина приложения](/screenshots/basket.jpeg)
 
   ### Страница Закладок
-  ![Страница Закладок](/screenshots/bookmarks.jpeg)
+  ![Страница Закладок](/screenshots/bookmatks.jpeg)
 
 </details>
 
